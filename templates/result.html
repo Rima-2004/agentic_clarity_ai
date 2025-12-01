@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Result • Agentic Communication Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      window.onload = () => {
+        const overlay = document.getElementById("loadingOverlay");
+        if (overlay) overlay.classList.add("hidden");
+      };
+    </script>
+  </head>
+
+  <body class="bg-slate-950 text-slate-100">
+    <div id="loadingOverlay" class="hidden"></div>
+
+    <div class="max-w-6xl mx-auto p-6 space-y-6">
+      <a href="/" class="text-sm text-blue-400 hover:underline">&larr; Back</a>
+      <h1 class="text-2xl font-bold capitalize">{{ agent }} result</h1>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-2xl p-5 bg-slate-900 border border-slate-700">
+          <h2 class="font-semibold mb-2">Original Message</h2>
+          <pre class="whitespace-pre-wrap text-slate-300 text-sm">
+{{ text }}</pre
+          >
+        </div>
+
+        <div class="rounded-2xl p-5 bg-slate-900 border border-slate-700">
+          <h2 class="font-semibold mb-2">Settings</h2>
+          <p class="text-slate-300 text-sm">
+            <span class="font-semibold">Reply tone:</span> {{ tone|title }}
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-2xl p-5 bg-slate-900 border border-slate-700">
+        <h2 class="font-semibold mb-3">Output</h2>
+        <pre class="whitespace-pre-wrap text-slate-200 text-sm">
+{{ result }}</pre
+        >
+      </div>
+    </div>
+  </body>
+</html>

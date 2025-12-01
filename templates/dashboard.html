@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agentic Communication Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Show loader when form is ACTUALLY submitting -->
+    <script>
+      window.onload = () => {
+        const form = document.getElementById("mainForm");
+        form.addEventListener("submit", () => {
+          document.getElementById("loadingOverlay").classList.remove("hidden");
+        });
+      };
+    </script>
+  </head>
+
+  <body class="bg-slate-950 text-slate-100">
+    <!-- Loading Overlay -->
+    <div
+      id="loadingOverlay"
+      class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+    >
+      <div class="text-center space-y-4">
+        <div
+          class="border-4 border-gray-300 border-t-blue-500 rounded-full w-12 h-12 animate-spin mx-auto"
+        ></div>
+        <p class="text-lg text-white font-semibold">Analyzing... please wait</p>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto p-6">
+      <h1 class="text-3xl font-bold">Agentic Communication Analyzer</h1>
+      <p class="text-slate-400">
+        AI-Powered Miscommunication, Tone & Writing Detector
+      </p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="mt-4 space-y-2">
+        {% for cat, msg in messages %}
+        <div
+          class="rounded-xl p-3 {{ 'bg-red-900/40 border border-red-400/50' if cat=='error' else 'bg-slate-800' }}"
+        >
+          {{ msg }}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
+
+      <!-- IMPORTANT: single form with id="mainForm" -->
+      <form id="mainForm" method="POST" class="mt-8">
+        <label class="block mb-4">
+          <span class="text-sm text-slate-300">Message to analyze</span>
+          <textarea
+            name="text"
+            rows="5"
+            required
+            class="mt-1 w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Paste the message here..."
+          ></textarea>
+        </label>
+
+        <label class="block mb-6">
+          <span class="text-sm text-slate-300"
+            >Reply tone (used by Suggested Reply agent)</span
+          >
+          <select
+            name="tone"
+            class="mt-1 w-full p-3 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="professional">Professional</option>
+            <option value="friendly">Friendly</option>
+            <option value="neutral">Neutral</option>
+            <option value="direct">Direct</option>
+            <option value="casual">Casual</option>
+          </select>
+        </label>
+
+        <!-- Agent Buttons -->
+        <div class="grid md:grid-cols-3 gap-4">
+          <button
+            type="submit"
+            formaction="/run/miscommunication"
+            class="rounded-2xl p-5 bg-slate-900 border border-slate-700 hover:border-blue-500 text-left"
+          >
+            <h3 class="font-semibold text-lg">Miscommunication Agent</h3>
+            <p class="text-slate-400 text-sm">
+              Detect ambiguity, tone issues & unclear meaning.
+            </p>
+          </button>
+
+          <button
+            type="submit"
+            formaction="/run/sentiment"
+            class="rounded-2xl p-5 bg-slate-900 border border-slate-700 hover:border-blue-500 text-left"
+          >
+            <h3 class="font-semibold text-lg">Sentiment Agent</h3>
+            <p class="text-slate-400 text-sm">
+              Emotion & sentiment classification with evidence.
+            </p>
+          </button>
+
+          <button
+            type="submit"
+            formaction="/run/grammar"
+            class="rounded-2xl p-5 bg-slate-900 border border-slate-700 hover:border-blue-500 text-left"
+          >
+            <h3 class="font-semibold text-lg">Grammar Agent</h3>
+            <p class="text-slate-400 text-sm">
+              Correct writing flaws & improve clarity.
+            </p>
+          </button>
+
+          <button
+            type="submit"
+            formaction="/run/context"
+            class="rounded-2xl p-5 bg-slate-900 border border-slate-700 hover:border-blue-500 text-left"
+          >
+            <h3 class="font-semibold text-lg">Context Inspector</h3>
+            <p class="text-slate-400 text-sm">
+              Detect missing info or unclear intent.
+            </p>
+          </button>
+
+          <button
+            type="submit"
+            formaction="/run/suggested"
+            class="rounded-2xl p-5 bg-slate-900 border border-slate-700 hover:border-blue-500 text-left md:col-span-1"
+          >
+            <h3 class="font-semibold text-lg">Suggested Reply Agent</h3>
+            <p class="text-slate-400 text-sm">
+              Generate a clean, neutral, professional reply.
+            </p>
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
