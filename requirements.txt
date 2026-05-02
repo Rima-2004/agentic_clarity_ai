@@ -6,10 +6,10 @@
 # python-dotenv
 # gunicorn
 # litellm
-crewai==0.28.8
+crewai==0.11.2
 crewai[google-genai]
 google-generativeai
 flask
 python-dotenv
 gunicorn
-litellm==1.35.0
+litellm
